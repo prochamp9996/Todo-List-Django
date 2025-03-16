@@ -1,0 +1,24 @@
+spec:
+  name: todo-list-django
+  services:
+    - name: web
+      git:
+        branch: main
+        repo_clone_url: https://github.com/prochamp9996/Todo-List-Django.git
+      envs:
+        - key: DEBUG
+          value: "False"
+        - key: SECRET_KEY
+          value: "replace_with_your_secret_key"
+        - key: ALLOWED_HOSTS
+          value: "${APP_DOMAIN}"
+        - key: DATABASE_URL
+          value: "${db.DATABASE_URL}"
+      http_port: 8080
+      instance_size_slug: basic-xxs
+      routes:
+        - path: /
+      run_command: gunicorn Todo_App.wsgi:application
+  databases:
+    - name: db
+      engine: PG
