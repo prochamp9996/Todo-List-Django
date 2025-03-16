@@ -40,6 +40,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Add to MIDDLEWARE after SecurityMiddleware
+MIDDLEWARE = [
+    # ...
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+]
+
+# Configure static files
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'Todo_List.urls'
 
